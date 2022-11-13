@@ -3,7 +3,7 @@
 This project is meant to allow users to explore the NASA Mars Rover api with a GUI. Users can see important information for the rovers that NASA has launched to mars, as well as browse images by date for each specific rover.
 
 ## Getting Started
-This project uses the current latest React version of 18.2.0, so make sure you are using that version of react before moving forward.
+This project uses the current latest React version of 18.2.0
 
 Running the project locally is as simple as these three steps:
 1. Clone the repo
