@@ -16,21 +16,23 @@ let page = 1;
 const RoverDetail = () => {
     const params = useParams();
     const dispatch = useDispatch();
-    const roverId = Number(params.id); //Cast param to number for comparison
+    const roverId = Number(params?.id); //Cast param to number for comparison
     const rovers = useSelector((state) => state.rovers);
     const photos = useSelector((state) => state.photos);
     const rover = rovers.filter((r) => (r.id === roverId));
-    const [ date, setDate ] = useState(new Date(rover[0].max_date).toJSON().substring(0, 10)); // This is if you want to default to max_date field of rover
+    const roverName = rover[0]?.name;
+    const lastPhotoDate = rover[0]?.max_date;
+    const [ date, setDate ] = useState(new Date(lastPhotoDate).toJSON().substring(0, 10));
 
     useEffect(() => {
         page = 1;
         dispatch(clearRoverPhotos());
-        dispatch(getRoverPhotos(rover[0].name, page, date));
+        dispatch(getRoverPhotos(roverName, page, date));
     }, [date]);
 
     const fetchPictures = () => {
         page = page + 1;
-        dispatch(getRoverPhotos(rover[0].name, page, date));
+        dispatch(getRoverPhotos(roverName, page, date));
     };
 
     return (
@@ -41,9 +43,9 @@ const RoverDetail = () => {
             </Card>
             {(photos.length === 0) ? 
                 <Paper sx={styles.noPhotos} style={{whiteSpace: 'pre-line'}}>
-                    <Typography sx={styles.text}>Uh Oh! Looks like the {rover[0].name} Rover didn't take any photos for the selected date.</Typography>
-                    <Typography sx={styles.text}>Please try another date to see pictures taken by the {rover[0].name} Rover.</Typography>
-                    <Typography sx={styles.text}>Reminder - The {rover[0].name} Rover landed on {rover[0].landing_date} and the latest pictures are from {rover[0].max_date}</Typography>
+                    <Typography sx={styles.text}>Uh Oh! Looks like the {roverName} Rover didn't take any photos for the selected date.</Typography>
+                    <Typography sx={styles.text}>Please try another date to see pictures taken by the {roverName} Rover.</Typography>
+                    <Typography sx={styles.text}>Reminder - The {roverName} Rover landed on {rover[0]?.landing_date} and the latest pictures are from {lastPhotoDate}</Typography>
                 </Paper>
                 :
                 <InfiniteScroll
@@ -53,7 +55,7 @@ const RoverDetail = () => {
                     }}
                     scrollThreshold={0.5}
                     hasMore={true}
-                    endMessage={<h4>You've seen it all!</h4>}
+                    endMessage={<Paper>That's all the photos for the selected date!</Paper>}
                 >
                     <Grid container spacing={3} alignItems='stretch' sx={styles.container}>
                         {photos.map((photo) => (

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 
 import Rover from "./Rover/Rover";
 import { clearRoverPhotos } from "../../actions";
@@ -14,6 +14,8 @@ const Rovers = () => {
     useEffect(() => {
         dispatch(clearRoverPhotos());
     });
+
+    if (!rovers) return (<Paper>Oops, looks like there aren't any rovers to display</Paper>); 
 
     return (
         <>
