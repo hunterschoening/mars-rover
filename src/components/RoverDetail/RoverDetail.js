@@ -20,8 +20,7 @@ const RoverDetail = () => {
     const rovers = useSelector((state) => state.rovers);
     const photos = useSelector((state) => state.photos);
     const rover = rovers.filter((r) => (r.id === roverId));
-    const [ date, setDate ] = useState(new Date().toJSON().substring(0, 10));
-    // const [ date, setDate ] = useState(new Date(rover[0].max_date).toJSON().substring(0, 10)); // This is if you want to default to max_date field of rover
+    const [ date, setDate ] = useState(new Date(rover[0].max_date).toJSON().substring(0, 10)); // This is if you want to default to max_date field of rover
 
     useEffect(() => {
         page = 1;
