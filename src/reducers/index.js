@@ -11,7 +11,6 @@ export default (state = { rovers: [], photos: [] }, action) => {
             };
         case FETCH_ROVER_PHOTOS:
             console.log('Fetching Rover Photos...');
-            console.log(action.payload.photos);
             return {
                 ...state,
                 photos: [ ...state.photos, ...action.payload.photos ]
