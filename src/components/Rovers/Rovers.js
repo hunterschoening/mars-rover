@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid, Paper } from "@mui/material";
 
 import Rover from "./Rover/Rover";
-import { clearRoverPhotos } from "../../actions";
+import { clearRoverPhotos } from '../../store/slices/roverSlice';
+
 
 import styles from "./styles";
 
 const Rovers = () => {
-    const rovers = useSelector((state) => state.rovers);
+    const rovers = useSelector((state) => state.rover.rovers);
     const dispatch = useDispatch();
     
     useEffect(() => {

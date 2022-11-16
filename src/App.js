@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Container } from "@mui/system";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getRovers } from "./actions";
+import { getRovers } from "./store/slices/roverSlice";
 
 import Rovers from "./components/Rovers/Rovers";
 import RoverDetail from "./components/RoverDetail/RoverDetail";
