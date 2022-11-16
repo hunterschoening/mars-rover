@@ -10,7 +10,6 @@ import CustomDatePicker from '../CustomDatePicker/CustomDatePicker';
 import styles from './styles';
 
 import { getRoverPhotos, clearRoverPhotos } from '../../store/slices/roverSlice';
-//import { clearRoverPhotos } from '../../actions';
 
 let page = 1;
 
