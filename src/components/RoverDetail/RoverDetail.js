@@ -9,7 +9,8 @@ import RoverPhoto from '../RoverPhoto/RoverPhoto';
 import CustomDatePicker from '../CustomDatePicker/CustomDatePicker';
 import styles from './styles';
 
-import { getRoverPhotos, clearRoverPhotos } from '../../actions';
+import { getRoverPhotos, clearRoverPhotos } from '../../store/slices/roverSlice';
+//import { clearRoverPhotos } from '../../actions';
 
 let page = 1;
 
@@ -17,8 +18,8 @@ const RoverDetail = () => {
     const params = useParams();
     const dispatch = useDispatch();
     const roverId = Number(params?.id); //Cast param to number for comparison
-    const rovers = useSelector((state) => state.rovers);
-    const photos = useSelector((state) => state.photos);
+    const rovers = useSelector((state) => state.rover.rovers);
+    const photos = useSelector((state) => state.rover.photos);
     const rover = rovers.filter((r) => (r.id === roverId));
     const roverName = rover[0]?.name;
     const lastPhotoDate = rover[0]?.max_date;
@@ -27,12 +28,12 @@ const RoverDetail = () => {
     useEffect(() => {
         page = 1;
         dispatch(clearRoverPhotos());
-        dispatch(getRoverPhotos(roverName, page, date));
+        dispatch(getRoverPhotos({ roverName, page, date }));
     }, [date]);
 
     const fetchPictures = () => {
         page = page + 1;
-        dispatch(getRoverPhotos(roverName, page, date));
+        dispatch(getRoverPhotos({ roverName, page, date }));
     };
 
     return (
